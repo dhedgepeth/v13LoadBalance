@@ -4,6 +4,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="appsettings.Subscriber.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Umbraco.Cloud.Cms.PublicAccess" Version="13.0.0" />

@@ -23,7 +23,25 @@
       "applicationUrl": "https://localhost:44323;http://localhost:45245",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Local"
-      }      
+      }
+    },
+    "UmbracoProject": {
+      "commandName": "Project",
+      "dotnetRunMessages": true,
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:44323;http://localhost:45245",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Local"
+      }
+    },
+    "Subscriber": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "applicationUrl": "https://localhost:44323;http://localhost:45245",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Subscriber"
+      },
+      "dotnetRunMessages": true
     }
   }
 }

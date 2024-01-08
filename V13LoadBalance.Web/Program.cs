@@ -1,11 +1,32 @@
+using Umbraco.Cms.Infrastructure.DependencyInjection;
+using V13LoadBalance.Web.ServerRoleAccessors;
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.CreateUmbracoBuilder()
+
+
+var umbracoBuilder = builder.CreateUmbracoBuilder()
     .AddBackOffice()
     .AddWebsite()
     .AddDeliveryApi()
-    .AddComposers()
-    .Build();
+    .AddComposers();
+
+if (builder.Environment.EnvironmentName.Equals("Subscriber"))
+{
+    umbracoBuilder.SetServerRegistrar<SubscriberServerRoleAccessor>()
+        .AddAzureBlobMediaFileSystem()
+        .AddAzureBlobImageSharpCache();
+}
+else if (builder.Environment.IsProduction())
+{
+    umbracoBuilder.SetServerRegistrar<SchedulingPublisherServerRoleAccessor>();
+}
+else
+{
+    umbracoBuilder.SetServerRegistrar<SingleServerRoleAccessor>();
+}
+
+umbracoBuilder.Build();
 
 WebApplication app = builder.Build();
 
