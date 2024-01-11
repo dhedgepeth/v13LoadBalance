@@ -3,3 +3,11 @@
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
 @Html.Raw(Model.Value("richText"))
+
+@{
+    var shows = Umbraco.ContentAtRoot().FirstOrDefault()
+    .ChildrenOfType("tVShowPage")
+    .Where(x => x.IsVisible());
+}
+
+<h1>There are currently @shows.Count() tv shows</h1>
