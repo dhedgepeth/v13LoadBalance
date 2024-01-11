@@ -1,4 +1,6 @@
+using Hangfire;
 using Umbraco.Cms.Infrastructure.DependencyInjection;
+using V13LoadBalance.Web;
 using V13LoadBalance.Web.ServerRoleAccessors;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
@@ -20,6 +22,7 @@ if (builder.Environment.EnvironmentName.Equals("Subscriber"))
 else if (builder.Environment.IsProduction())
 {
     umbracoBuilder.SetServerRegistrar<SchedulingPublisherServerRoleAccessor>();
+    RecurringJob.AddOrUpdate<TvMazeUtility>("MoveOneTvShowFromTvMazeToUmbraco", x => x.MoveTvShowsFromTvMazeToUmbraco(), Cron.Monthly);
 }
 else
 {
