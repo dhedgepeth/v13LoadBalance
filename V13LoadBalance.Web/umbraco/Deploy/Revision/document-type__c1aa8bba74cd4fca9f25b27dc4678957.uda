@@ -1,14 +1,12 @@
 {
   "Name": "Home",
   "Alias": "home",
-  "DefaultTemplate": "umb://template/f714dd4a97044719bfe09ba119ac4649",
-  "AllowedTemplates": [
-    "umb://template/f714dd4a97044719bfe09ba119ac4649"
-  ],
+  "AllowedTemplates": [],
   "HistoryCleanup": {},
   "Icon": "icon-document",
   "Thumbnail": "folder.png",
   "Permissions": {
+    "AllowedAtRoot": true,
     "AllowedChildContentTypes": []
   },
   "CompositionContentTypes": [],
@@ -32,10 +30,6 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
-      "Ordering": true
-    },
-    {
-      "Udi": "umb://template/f714dd4a97044719bfe09ba119ac4649",
       "Ordering": true
     }
   ],
