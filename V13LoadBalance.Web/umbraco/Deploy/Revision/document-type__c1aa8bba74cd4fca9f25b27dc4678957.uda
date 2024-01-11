@@ -1,7 +1,10 @@
 {
   "Name": "Home",
   "Alias": "home",
-  "AllowedTemplates": [],
+  "DefaultTemplate": "umb://template/f68c5b5fb5384264b956b071b193ffd8",
+  "AllowedTemplates": [
+    "umb://template/f68c5b5fb5384264b956b071b193ffd8"
+  ],
   "HistoryCleanup": {},
   "Icon": "icon-document",
   "Thumbnail": "folder.png",
@@ -17,6 +20,13 @@
       "Alias": "content",
       "PropertyTypes": [
         {
+          "Key": "4f553b97-768e-4186-a264-3c17d51efb02",
+          "Alias": "richText",
+          "DataType": "umb://data-type/8133f607bfff437d949ac590862292b5",
+          "Name": "Rich Text",
+          "SortOrder": 1
+        },
+        {
           "Key": "c5fc5c28-5a40-4361-97a9-8891bb1912d3",
           "Alias": "bodyText",
           "DataType": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
@@ -30,6 +40,14 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/0cc0eba1996042c9bf9b60e150b429ae",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://data-type/8133f607bfff437d949ac590862292b5",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/f68c5b5fb5384264b956b071b193ffd8",
       "Ordering": true
     }
   ],
