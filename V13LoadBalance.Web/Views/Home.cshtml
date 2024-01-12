@@ -1,6 +1,7 @@
 ﻿@using Umbraco.Cms.Core.Sync
 @inject IServerRoleAccessor _serverRoleAccessor;
-@model Home
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
 
 @{
