@@ -1,4 +1,6 @@
-﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+﻿@using Umbraco.Cms.Core.Sync
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inject IServerRoleAccessor _serverRoleAccessor;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Home>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 
@@ -8,6 +10,17 @@
     var shows = Umbraco.ContentAtRoot().FirstOrDefault()
     .ChildrenOfType("tVShowPage")
     .Where(x => x.IsVisible());
+    
+    var latestShow = shows?.LastOrDefault() as TVshowPage;
 }
 
-<h1>There are currently @shows.Count() tv shows</h1>
+@if (shows?.Any() ?? false)
+{
+    <h1>There are currently @shows.Count() tv shows in @_serverRoleAccessor.CurrentServerRole</h1>
+}
+
+@if (latestShow != null && latestShow.Thumbnail != null)
+{
+    <img src="@latestShow.Thumbnail.Url()">
+    <h1>@latestShow.TvShowID</h1>
+}
