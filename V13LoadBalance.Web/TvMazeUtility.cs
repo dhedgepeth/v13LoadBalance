@@ -172,7 +172,7 @@ public class TvMazeUtility
         {
             if (Regex.IsMatch(firstChar.ToString(), @"^[a-zA-Z]+$", RegexOptions.IgnoreCase))
             {
-                existingFolder = _mediaService.CreateMedia(firstChar.ToString(), parentFolder.Id,
+                existingFolder = _mediaService.CreateMedia(firstChar.ToString(), parentFolder.GetUdi(),
                     Constants.Conventions.MediaTypes.Folder);
                 _mediaService.Save(existingFolder);
             }
@@ -182,7 +182,7 @@ public class TvMazeUtility
 
                 if (existingFolder == null)
                 {
-                    existingFolder = _mediaService.CreateMedia(othersFolder, parentFolder.Id,
+                    existingFolder = _mediaService.CreateMedia(othersFolder, parentFolder.GetUdi(),
                         Constants.Conventions.MediaTypes.Folder);
                     _mediaService.Save(existingFolder);
                 }
