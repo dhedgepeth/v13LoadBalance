@@ -164,7 +164,7 @@ public class TvMazeUtility
             parentFolder = _mediaService.CreateMedia("TV Shows", Constants.System.Root, Constants.Conventions.MediaTypes.Folder);
         }
 
-        //var existingFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == firstChar.ToString());
+        //var existingFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == firstChar.ToString()); 
         var childFolders = _mediaService.GetPagedChildren(parentFolder.Id, 0, int.MaxValue, out _);
         var existingFolder = childFolders.FirstOrDefault(x => x.Name == firstChar.ToString());
 
