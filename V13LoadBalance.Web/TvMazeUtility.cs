@@ -63,11 +63,9 @@ public class TvMazeUtility
             try { response.EnsureSuccessStatusCode(); } catch { break; }
             if (shows.Any())
             {
-                foreach (var show in shows)
-                {
+                Parallel.ForEach(shows, show => {
                     InsertedOrUpdated(show);
-
-                }
+                });
             }
         }
         return $"Sync complete until page {page}";
@@ -160,13 +158,21 @@ public class TvMazeUtility
 
         char firstChar = char.ToUpper(tvShowName[0]);
 
-        var existingFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == firstChar.ToString());
+        var parentFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == "TV Shows");
+        if (parentFolder == null)
+        {
+            parentFolder = _mediaService.CreateMedia("TV Shows", Constants.System.Root, Constants.Conventions.MediaTypes.Folder);
+        }
+
+        //var existingFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == firstChar.ToString()); 
+        var childFolders = _mediaService.GetPagedChildren(parentFolder.Id, 0, int.MaxValue, out _);
+        var existingFolder = childFolders.FirstOrDefault(x => x.Name == firstChar.ToString());
 
         if (existingFolder == null)
         {
             if (Regex.IsMatch(firstChar.ToString(), @"^[a-zA-Z]+$", RegexOptions.IgnoreCase))
             {
-                existingFolder = _mediaService.CreateMedia(firstChar.ToString(), Constants.System.Root,
+                existingFolder = _mediaService.CreateMedia(firstChar.ToString(), parentFolder.Id,
                     Constants.Conventions.MediaTypes.Folder);
                 _mediaService.Save(existingFolder);
             }
@@ -176,7 +182,7 @@ public class TvMazeUtility
 
                 if (existingFolder == null)
                 {
-                    existingFolder = _mediaService.CreateMedia(othersFolder, Constants.System.Root,
+                    existingFolder = _mediaService.CreateMedia(othersFolder, parentFolder.Id,
                         Constants.Conventions.MediaTypes.Folder);
                     _mediaService.Save(existingFolder);
                 }
