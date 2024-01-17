@@ -63,10 +63,10 @@ public class TvMazeUtility
             try { response.EnsureSuccessStatusCode(); } catch { break; }
             if (shows.Any())
             {
-                Parallel.ForEach(shows, show =>
+                foreach (var show in shows)
                 {
                     InsertedOrUpdated(show);
-                });
+                }
             }
         }
         return $"Sync complete until page {page}";
