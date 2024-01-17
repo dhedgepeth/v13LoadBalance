@@ -63,9 +63,13 @@ public class TvMazeUtility
             try { response.EnsureSuccessStatusCode(); } catch { break; }
             if (shows.Any())
             {
-                Parallel.ForEach(shows, show => {
+               /* Parallel.ForEach(shows, show => {
                     InsertedOrUpdated(show);
-                });
+                });*/
+               foreach (var show in shows)
+                {
+                    InsertedOrUpdated(show);
+                }
             }
         }
         return $"Sync complete until page {page}";
@@ -162,6 +166,7 @@ public class TvMazeUtility
         if (parentFolder == null)
         {
             parentFolder = _mediaService.CreateMedia("TV Shows", Constants.System.Root, Constants.Conventions.MediaTypes.Folder);
+            _mediaService.Save(parentFolder);
         }
 
         //var existingFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == firstChar.ToString()); 
@@ -172,7 +177,7 @@ public class TvMazeUtility
         {
             if (Regex.IsMatch(firstChar.ToString(), @"^[a-zA-Z]+$", RegexOptions.IgnoreCase))
             {
-                existingFolder = _mediaService.CreateMedia(firstChar.ToString(), parentFolder.GetUdi(),
+                existingFolder = _mediaService.CreateMedia(firstChar.ToString(), parentFolder,
                     Constants.Conventions.MediaTypes.Folder);
                 _mediaService.Save(existingFolder);
             }
@@ -182,7 +187,7 @@ public class TvMazeUtility
 
                 if (existingFolder == null)
                 {
-                    existingFolder = _mediaService.CreateMedia(othersFolder, parentFolder.GetUdi(),
+                    existingFolder = _mediaService.CreateMedia(othersFolder, parentFolder,
                         Constants.Conventions.MediaTypes.Folder);
                     _mediaService.Save(existingFolder);
                 }
