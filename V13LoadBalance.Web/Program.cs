@@ -22,7 +22,7 @@ if (builder.Environment.EnvironmentName.Equals("Subscriber"))
 else if (builder.Environment.IsProduction())
 {
     umbracoBuilder.SetServerRegistrar<SchedulingPublisherServerRoleAccessor>();
-    RecurringJob.AddOrUpdate<TvMazeUtility>("MoveOneTvShowFromTvMazeToUmbraco", x => x.MoveTvShowsFromTvMazeToUmbraco(), Cron.Monthly);
+    RecurringJob.AddOrUpdate<TvMazeUtility>("MoveOneTvShowFromTvMazeToUmbraco", x => x.MoveTvShowsFromTvMazeToUmbraco(), Cron.Daily);
 }
 else
 {
