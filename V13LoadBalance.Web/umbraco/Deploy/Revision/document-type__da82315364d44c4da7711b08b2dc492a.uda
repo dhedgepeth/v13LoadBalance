@@ -1,0 +1,39 @@
+{
+  "Name": "Relative URL test",
+  "Alias": "relativeURLTest",
+  "AllowedTemplates": [],
+  "HistoryCleanup": {},
+  "Icon": "icon-item-arrangement",
+  "Thumbnail": "folder.png",
+  "Description": "Andrews handsome doc type",
+  "Permissions": {
+    "AllowedAtRoot": true,
+    "AllowedChildContentTypes": []
+  },
+  "CompositionContentTypes": [],
+  "PropertyGroups": [
+    {
+      "Key": "3f096272-086c-4358-ac7a-8e22a1b8612a",
+      "Name": "Cool",
+      "Alias": "cool",
+      "PropertyTypes": [
+        {
+          "Key": "ce91839f-b12a-47ca-a2c5-0b108cd4595e",
+          "Alias": "relativeRTE",
+          "DataType": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+          "Name": "Relative RTE"
+        }
+      ]
+    }
+  ],
+  "PropertyTypes": [],
+  "Udi": "umb://document-type/da82315364d44c4da7711b08b2dc492a",
+  "Dependencies": [
+    {
+      "Udi": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.ContentType.DocumentTypeArtifact",
+  "__version": "13.0.3"
+}
