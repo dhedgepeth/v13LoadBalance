@@ -7,6 +7,12 @@
       "Url": "https://www.s1.umbraco.io/project/read-lock",
       "Workspaces": [
         {
+          "Id": "faaa414c-b371-4d9e-97ce-92191a4fac3f",
+          "Name": "Development",
+          "Type": "development",
+          "Url": "https://dev-read-lock.useast01.umbraco.io"
+        },
+        {
           "Id": "fbb39a5f-a653-4716-86a3-8c2295130db9",
           "Name": "Live",
           "Type": "live",
