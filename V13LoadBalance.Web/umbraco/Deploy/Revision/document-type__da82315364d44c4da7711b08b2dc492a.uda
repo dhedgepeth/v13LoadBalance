@@ -1,7 +1,10 @@
 {
   "Name": "Relative URL test",
   "Alias": "relativeURLTest",
-  "AllowedTemplates": [],
+  "DefaultTemplate": "umb://template/1783573fd19a48189a4355f48c7e6b84",
+  "AllowedTemplates": [
+    "umb://template/1783573fd19a48189a4355f48c7e6b84"
+  ],
   "HistoryCleanup": {},
   "Icon": "icon-item-arrangement",
   "Thumbnail": "folder.png",
@@ -31,6 +34,10 @@
   "Dependencies": [
     {
       "Udi": "umb://data-type/ca90c9500aff4e72b976a30b1ac57dad",
+      "Ordering": true
+    },
+    {
+      "Udi": "umb://template/1783573fd19a48189a4355f48c7e6b84",
       "Ordering": true
     }
   ],
