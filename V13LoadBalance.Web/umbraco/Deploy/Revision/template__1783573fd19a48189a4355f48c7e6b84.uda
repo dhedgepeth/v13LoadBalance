@@ -1,0 +1,14 @@
+{
+  "Name": "Relative URL test",
+  "Alias": "RelativeURLTest",
+  "File": "umb://template-file/RelativeURLTest.cshtml",
+  "Udi": "umb://template/1783573fd19a48189a4355f48c7e6b84",
+  "Dependencies": [
+    {
+      "Udi": "umb://template-file/RelativeURLTest.cshtml",
+      "Ordering": true
+    }
+  ],
+  "__type": "Umbraco.Deploy.Infrastructure,Umbraco.Deploy.Infrastructure.Artifacts.TemplateArtifact",
+  "__version": "13.0.3"
+}
