@@ -11,6 +11,7 @@ using Umbraco.Cms.Core.PropertyEditors;
 using Umbraco.Cms.Core.Strings;
 using Umbraco.Deploy.Infrastructure.Extensions;
 using System.Net.Http.Formatting;
+using MailKit;
 
 namespace V13LoadBalance.Web;
 
@@ -103,7 +104,6 @@ public class TvMazeUtility
             {
                 var media = ImportMediaFromTVMazeToUmbraco(show);
                 var newTvShow = _contentService.Create(show.Name, TvshowLibrary.Id, TVshowPage.ModelTypeAlias);
-                //newTvShow.SetCultureName(show.Name, culture);
                 newTvShow.SetValue(nameof(TVshowPage.TvShowID), show.Id);
 
                 if (media != null)
@@ -155,42 +155,12 @@ public class TvMazeUtility
 
     private IMedia CreateOrGetMediaFolderFromUmbraco(string tvShowName)
     {
-        const string othersFolder = "Others";
-
-        char firstChar = char.ToUpper(tvShowName[0]);
-
-        var parentFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == "TV Shows");
+        var parentFolder = _mediaService.GetRootMedia().First();
         if (parentFolder == null)
         {
-            parentFolder = _mediaService.CreateMedia("TV Shows", Constants.System.Root, Constants.Conventions.MediaTypes.Folder);
-            _mediaService.Save(parentFolder);
+            throw new FolderNotFoundException($"No Folder exists in the Media Library, please create one.");
         }
-
-        //var existingFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == firstChar.ToString()); 
-        var childFolders = _mediaService.GetPagedChildren(parentFolder.Id, 0, int.MaxValue, out _);
-        var existingFolder = childFolders.FirstOrDefault(x => x.Name == firstChar.ToString());
-
-        if (existingFolder == null)
-        {
-            if (Regex.IsMatch(firstChar.ToString(), @"^[a-zA-Z]+$", RegexOptions.IgnoreCase))
-            {
-                existingFolder = _mediaService.CreateMedia(firstChar.ToString(), parentFolder,
-                    Constants.Conventions.MediaTypes.Folder);
-                _mediaService.Save(existingFolder);
-            }
-            else
-            {
-                existingFolder = _mediaService.GetRootMedia().FirstOrDefault(x => x.Name == othersFolder);
-
-                if (existingFolder == null)
-                {
-                    existingFolder = _mediaService.CreateMedia(othersFolder, parentFolder,
-                        Constants.Conventions.MediaTypes.Folder);
-                    _mediaService.Save(existingFolder);
-                }
-            }
-        }
-        return existingFolder;
+        return parentFolder;
     }
 
 
